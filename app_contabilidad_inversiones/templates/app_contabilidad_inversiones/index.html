@@ -1,0 +1,33 @@
+{% extends "app_contabilidad_inversiones/layout.html" %}
+
+{% block body %}
+
+    <h1>Bienvenido a su contabiliad de inversiones</h1>
+
+    <div class="espacio_superior">
+        <a href="{% url 'app_contabilidad_inversiones:resumen_inversiones' %}">Ver resumen de inversiones</a>
+    </div>
+
+    <!--Crear resumen transacciones (numero de transacciones, dinero invertido,...)-->
+    <div class="espacio_superior">
+        <a href="{% url 'app_contabilidad_inversiones:ingresar_transaccion' %}">Ingresar nueva transacción</a>
+    </div>
+    
+    <!--Crear boton para linkear con ingresar nueva transaccion-->
+    <div  class="espacio_superior">
+        <a href="{% url 'app_contabilidad_inversiones:ver_transacciones' %}">Ver todas las transacciones</a>
+    </div>
+
+    <!--Crear boton para linkear con ver todas las transacciones-->
+    <div  class="espacio_superior">
+        <a href="{% url 'app_contabilidad_inversiones:ver_informe_detallado' %}">Ver informe detallado</a>
+    </div>
+    <!--Crear boton para linkear con ver informe-->
+
+    <!--Crear boton para linkear con borrar transaccion-->
+    <div  class="espacio_superior">
+        <a href="{% url 'app_contabilidad_inversiones:eliminar_transaccion' %}">Eliminar una transaccion</a>
+    </div>
+    <!--Crear boton para linkear con borrar transaccion-->
+
+{% endblock %}

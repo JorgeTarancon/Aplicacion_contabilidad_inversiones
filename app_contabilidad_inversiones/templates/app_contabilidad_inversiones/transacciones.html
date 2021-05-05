@@ -1,0 +1,33 @@
+{% extends "app_contabilidad_inversiones/layout.html" %}
+
+{% block body %}
+
+    <h1>Transacciones almacenadas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE ACTIVO</th>
+                <th>PLATAFORMA</th>
+                <th>PRECIO (€)</th>
+                <th>FECHA</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trans in transacciones %}
+                <tr>
+                    <td> {{trans.id}} </td>
+                    <td> {{trans.nombre}} </td>
+                    <td> {{trans.plataforma.nombre_plataforma}} </td>
+                    <td> {{trans.precio}} </td>
+                    <td> {{trans.fecha}} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="espacio_superior">
+        <a href="{% url 'app_contabilidad_inversiones:index' %}">Volver a la página inicial</a>
+    </div>
+
+{% endblock %}
