@@ -1,8 +1,12 @@
 from django.contrib import admin
-from .models import Usuario
+from self_index_app.models import Investor, Transactions
 
 # Register your models here.
-class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ['patrimonio']
+class InvestorAdmin(admin.ModelAdmin):
+    list_display = ['investor_id', 'worth']
 
-admin.site.register(Usuario, UsuarioAdmin)
+class TransactionsAdmin(admin.ModelAdmin):
+    list_display = ['transaction_id', 'investor', 'transaction_date', 'amount', 'asset_name']
+
+admin.site.register(Investor, InvestorAdmin)
+admin.site.register(Transactions, TransactionsAdmin)
