@@ -9,8 +9,8 @@ class TransactionForm extends React.Component {
         super(props);
         this.state = {
             transactionDate: '',
-            shareAmount: '1',
-            sharePrice: '0.0',
+            shareAmount: 1,
+            sharePrice: 0.0,
             shareTicker: ''
         }
     }
@@ -23,17 +23,20 @@ class TransactionForm extends React.Component {
     }
 
     handleSubmit = event => {
-        const {transactionDate, shareAmount, sharePrice, shareTicker } = this.state;
-        const transactionAmount = sharePrice*shareAmount;
+        event.preventDefault();
+        const {transactionDate, shareAmount, sharePrice, shareTicker } = this.state,
+            transactionAmount = (sharePrice*shareAmount).toFixed(4);
+        console.log(transactionAmount);
         const transactionInfo = {
             investor: 1,
             transaction_date: transactionDate,
             amount: transactionAmount,
             assent_name: shareTicker
-        }
-
+        };
+        
         axios.post('http://localhost:8000/api/transactions/', transactionInfo)
-            .then(response => console.log(response));        
+            .then(response => console.log(response))
+            .catch(error => console.log(error));    
     }
 
     render() {

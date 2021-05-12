@@ -15,14 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
+# from django.conf.urls import url
+# from rest_framework import routers
 from self_index_app import views
 
-router = routers.DefaultRouter()
-router.register(r'investors', views.InvestorView, 'investor')
-router.register(r'transactions', views.TransactionView, 'transaction')
+# router = routers.DefaultRouter()
+# router.register(r'investors', views.InvestorView, 'investor')
+# router.register(r'transactions', views.TransactionView, 'transaction')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/investors/', views.investors_list),
+    path('api/transactions/', views.add_transaction)
 ]
