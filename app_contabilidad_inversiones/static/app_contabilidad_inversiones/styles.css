@@ -1,0 +1,65 @@
+/* GENERALES */
+body{
+    background-color:antiquewhite;
+}
+
+h3{
+    font-family:sans-serif;
+    font-size: 25px;
+    text-align: center;
+    color:black;
+}
+
+table {
+    margin: 1px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td, th { /* Si ponemos varios elementos separados por una coma, el estilo se aplica a todos esos elementos*/
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+div{
+    margin: 30px;
+}
+/* GENERALES */
+
+/* CLASES */
+.titulo{
+    font-family: sans-serif;
+    font-size: 35px;
+    color:antiquewhite;
+    text-align: left;
+    padding-top: 40px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    font-style:oblique;
+    width: auto;
+    height: auto;
+    background-color: orange;
+
+}
+
+.menu{
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+.tabla{
+    width:max-content;
+    height:fit-content;
+    background-color:white;
+    color: black;
+    border: 2px solid black;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+.llamativo_danger{
+    color: rgb(248, 14, 14);
+    font-weight: bolder;
+    font-size: 20px;
+}
+/* CLASES */
