@@ -1,0 +1,27 @@
+{% extends "app_contabilidad_inversiones/layout.html" %}
+
+{% block body %}
+
+    <div>
+        ID de la transacción: {{ transaccion.id }}
+        <br>
+        Nombre de la transacción: {{ transaccion.nombre }}
+        <br>
+        Precio de la transacción: {{ transaccion.precio }} {{transaccion.moneda}}
+        <br>
+        Fecha de la transacción: {{ transaccion.fecha }}
+    </div>
+    <div class="llamativo_danger">
+        ¿Desea eliminar esta transaccion?
+    </div>
+    <div>
+        <form action="{% url 'app_contabilidad_inversiones:ver_transaccion_individual' transaccion.id %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Eliminar">
+        </form>
+    </div>
+
+    <div  class="menu">
+        <a href="{% url 'app_contabilidad_inversiones:ver_transacciones' %}">Volver a todas las transacciones</a>
+    </div>
+{% endblock %}

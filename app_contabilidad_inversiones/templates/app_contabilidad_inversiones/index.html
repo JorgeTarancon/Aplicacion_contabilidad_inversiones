@@ -1,0 +1,25 @@
+{% extends "app_contabilidad_inversiones/layout.html" %}
+
+{% block body %}
+    <h1 class="titulo">Bienvenido a su contabiliad de inversiones</h1>
+
+    <form action="{% url 'app_contabilidad_inversiones:resumen_inversiones' %}" class="menu">
+        <input type="submit" value="Ver resumen de inversiones" />
+    </form>
+
+    <!--Crear resumen transacciones (numero de transacciones, dinero invertido,...)-->
+    <form action="{% url 'app_contabilidad_inversiones:ingresar_transaccion' %}" class="menu">
+        <input type="submit" value="Ingresar nueva transacción" />
+    </form>
+    
+    <!--Crear boton para linkear con ingresar nueva transaccion-->
+    <form action="{% url 'app_contabilidad_inversiones:ver_transacciones' %}" class="menu">
+        <input type="submit" value="Ver todas las transacciones" />
+    </form>
+
+    <!--Crear boton para linkear con ver cotizaciones actuales-->
+    <form action="{% url 'app_contabilidad_inversiones:ver_cotizaciones_actuales' %}" class="menu">
+        <input type="submit" value="Ver cotizaciones actuales" />
+    </form>
+
+{% endblock %}

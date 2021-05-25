@@ -1,0 +1,74 @@
+{% extends "app_contabilidad_inversiones/layout.html" %}
+
+{% block body %}
+    <h1 class="titulo">Transacciones almacenadas</h1>
+    <div>
+        <form action="{% url 'app_contabilidad_inversiones:ver_transacciones' %}" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Convertir">
+        </form>
+    </div>
+    
+    <div class="tabla">
+        <table>
+            <thead>
+                <tr>
+                    <th>FECHA</th>
+                    <th>NOMBRE ACTIVO</th>
+                    <th>SÍMBOLO</th>
+                    <th>BOLSA</th>
+                    <th>PRECIO</th>
+                    <th>MONEDA</th>
+                    <th>PLATAFORMA</th>
+                </tr>
+            </thead>
+             {% if not diccionario_transacciones %}
+                <tbody>
+                    {% for trans in transacciones %}
+                        <tr>
+                            <td> {{trans.fecha}} </td>
+                            <!-- <td>{{trans.nombre}}</td> -->
+                            <td><a href="{% url 'app_contabilidad_inversiones:ver_transaccion_individual' trans.id %}">{{trans.nombre}}</a></td>
+                            <td>
+                                {% if trans.simbolo == None %}
+                                    
+                                {% else %}
+                                    {{ trans.simbolo }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if trans.bolsa == None %}
+                                    
+                                {% else %}
+                                    {{ trans.bolsa }}
+                                {% endif %}
+                            </td>
+                            <td> {{trans.precio}} </td>
+                            <td> {{ trans.moneda }} </td>
+                            <td> {{trans.plataforma.nombre_plataforma}} </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            {% else %}
+                <tbody>
+                    {% for key,valor in diccionario_transacciones.items %}
+                        <tr>
+                            {% for key2,valor2 in valor.items %}
+                                {% if key2 == "nombre" %}
+                                    <td><a href="{% url 'app_contabilidad_inversiones:ver_transaccion_individual' key %}">{{valor2}}</a></td>
+                                {% else %}
+                                    <td>{{ valor2 }}</td>
+                                {% endif %}     
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            {% endif %}
+        </table>
+    </div>
+
+    <div class="menu">
+        <a href="{% url 'app_contabilidad_inversiones:index' %}">Volver a la página inicial</a>
+    </div>
+{% endblock %}

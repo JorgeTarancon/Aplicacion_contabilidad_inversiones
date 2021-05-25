@@ -1,0 +1,44 @@
+{% extends "app_contabilidad_inversiones/layout.html" %}
+
+{% block body %}
+<h1 class="titulo">Cotizaciones actuales</h1>
+
+<div>
+    <form action="{% url 'app_contabilidad_inversiones:ver_cotizaciones_actuales' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Convertir">
+    </form>
+</div>
+
+
+<div class="tabla">
+    <table>
+        <thead>
+            <tr>
+                <th>SÍMBOLO</th>
+                <th>NOMBRE ACTIVO</th>
+                <th>BOLSA</th>
+                <th>PRECIO</th>
+                <th>MONEDA</th>
+            </tr>
+        </thead>
+            <tbody>
+                {% for key,valor in diccionario_precio_actual_stocks.items %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        {% for key2,valor2 in valor.items %}
+                            <td>{{ valor2 }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+</div>
+
+
+<div class="menu">
+    <a href="{% url 'app_contabilidad_inversiones:index' %}">Volver a la página inicial</a>
+</div>
+
+{% endblock %}

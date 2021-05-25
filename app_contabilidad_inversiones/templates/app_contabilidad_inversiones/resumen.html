@@ -1,0 +1,58 @@
+{% extends "app_contabilidad_inversiones/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h1 class="titulo">Resumen inversiones</h1>
+<div>
+    TOTAL de transacciones: {{ numero_transacciones }}
+    <br>
+    TOTAL de plataformas: {{ numero_plataformas }}
+</div>
+
+<div>
+    <form action="{% url 'app_contabilidad_inversiones:resumen_inversiones' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Convertir">
+    </form>
+</div>
+<!--Grafico combinado de transacciones y dinero por plataforma-->
+<div class="chart-container" style="position: relative; height:300px; width:600px">
+    <canvas id="mezcla"  height="300px" width="600px"></canvas>
+</div>
+<script>
+show_mixed_charts(
+    id_canvas = 'mezcla',
+    titulo = '',
+    labels_chart= ("{{ plataformas|safeseq|join:','}}").split(","),
+    chart_type1='bar',
+    label_chart1='número de transacciones',
+    data1=("{{ transacciones|safeseq|join:',' }}").split(","),
+    chart_type2='line',
+    label_chart2=`Dinero ({{ moneda_mostrar }})`,
+    data2=("{{ dinero_por_plataforma|safeseq|join:',' }}").split(",")
+    )
+</script>
+<!--Grafico combinado de transacciones y dinero por plataforma-->
+
+<!--Grafico de transacciones por fecha-->
+<div class="chart-container" style="position: relative; height:200px; width:300px">
+    <canvas id="transacciones_en_tiempo" width="10px"></canvas>
+</div>
+<script>
+    show_chart(
+        chart_type='line',
+        id_canvas="transacciones_en_tiempo",
+        titulo="Número de transacciones por fecha",
+        labels_chart=("{{ fechas|safeseq|join:',' }}").split(','),
+        label_chart='transacciones',
+        data=("{{ conteo_por_fecha|safeseq|join:',' }}").split(",")
+        )
+</script>
+<!--Grafico de transacciones por fecha-->
+
+<div class="menu">
+    <a href="{% url 'app_contabilidad_inversiones:index' %}">Volver a la página inicial</a>
+</div>
+
+{% endblock %}
